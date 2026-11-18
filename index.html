@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AEGIS-Rx Mission Status</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<h1>AEGIS-Rx</h1>
+
+<div class="navbar">
+    <a href="index.html">Mission Status</a>
+    <a href="biodosimetry.html">Biodosimetry</a>
+    <a href="pharmacy.html">Pharmacy</a>
+    <a href="prescribe.html">Prescribe</a>
+    <a href="missionphases.html">Mission Phases</a>
+</div>
+
+<div class="alert" id="stormAlert">
+    Space Weather Status: S0 (Nominal)
+</div>
+
+<div class="card">
+
+    <h3>Scenario Selection</h3>
+
+    <select id="scenario" onchange="changeScenario()">
+        <option value="nominal">Nominal Cruise</option>
+        <option value="s3">S3 Solar Particle Event</option>
+        <option value="post48">Post-Event 48 Hours</option>
+    </select>
+
+</div>
+
+<div class="card">
+    <h3>Mission Summary</h3>
+
+    <p id="missionRisk">Crew at Risk: 0 / 4</p>
+    <p id="highestDose">Highest Event Dose: Below Detection</p>
+    <p id="mostExposed">Most Exposed Crew Member: None</p>
+</div>
+
+<div class="crew-grid">
+
+    <div class="card">
+        <h3>Reyes</h3>
+
+        <p id="reyesStatus" class="safe">✅ Normal</p>
+
+        <p><strong>Career Dose:</strong> 412 mSv / 600 mSv</p>
+
+        <p id="reyesDose">Event Dose: Below Detection</p>
+
+        <p id="reyesCI">95% CI: N/A</p>
+
+        <p id="reyesQuality">Radiation Quality: None Detected</p>
+
+        <p id="reyesSymptoms">Symptoms: None</p>
+    </div>
+
+    <div class="card">
+        <h3>Okafor</h3>
+
+        <p id="okaforStatus" class="safe">✅ Normal</p>
+
+        <p><strong>Career Dose:</strong> 198 mSv / 600 mSv</p>
+
+        <p id="okaforDose">Event Dose: Below Detection</p>
+
+        <p id="okaforCI">95% CI: N/A</p>
+
+        <p id="okaforQuality">Radiation Quality: None Detected</p>
+
+        <p id="okaforSymptoms">Symptoms: None</p>
+    </div>
+
+    <div class="card">
+        <h3>Lindqvist</h3>
+
+        <p id="lindqvistStatus" class="safe">✅ Normal</p>
+
+        <p><strong>Career Dose:</strong> 255 mSv / 600 mSv</p>
+
+        <p id="lindqvistDose">Event Dose: Below Detection</p>
+
+        <p id="lindqvistCI">95% CI: N/A</p>
+
+        <p id="lindqvistQuality">Radiation Quality: None Detected</p>
+
+        <p id="lindqvistSymptoms">Symptoms: None</p>
+    </div>
+
+    <div class="card">
+        <h3>Haruto</h3>
+
+        <p id="harutoStatus" class="safe">✅ Normal</p>
+
+        <p><strong>Career Dose:</strong> 290 mSv / 600 mSv</p>
+
+        <p id="harutoDose">Event Dose: Below Detection</p>
+
+        <p id="harutoCI">95% CI: N/A</p>
+
+        <p id="harutoQuality">Radiation Quality: None Detected</p>
+
+        <p id="harutoSymptoms">Symptoms: None</p>
+    </div>
+
+</div>
+
+<footer>
+Decision Support Only • Synthetic Crew Data • Not a Medical Device
+</footer>
+
+<script>
+
+function changeScenario(){
+
+    let scenario =
+    document.getElementById("scenario").value;
+
+    localStorage.setItem(
+        "missionScenario",
+        scenario
+    );
+
+    if(scenario === "nominal"){
+
+        stormAlert.innerHTML =
+        "Space Weather Status: S0 (Nominal)";
+
+        missionRisk.innerHTML =
+        "Crew at Risk: 0 / 4";
+
+        highestDose.innerHTML =
+        "Highest Event Dose: Below Detection";
+
+        mostExposed.innerHTML =
+        "Most Exposed Crew Member: None";
+
+        reyesStatus.innerHTML = "✅ Normal";
+        reyesDose.innerHTML = "Event Dose: Below Detection";
+        reyesCI.innerHTML = "95% CI: N/A";
+        reyesQuality.innerHTML =
+        "Radiation Quality: None Detected";
+        reyesSymptoms.innerHTML = "Symptoms: None";
+
+        okaforStatus.innerHTML = "✅ Normal";
+        okaforDose.innerHTML = "Event Dose: Below Detection";
+
+        lindqvistStatus.innerHTML = "✅ Normal";
+        lindqvistDose.innerHTML = "Event Dose: Below Detection";
+
+        harutoStatus.innerHTML = "✅ Normal";
+        harutoDose.innerHTML = "Event Dose: Below Detection";
+    }
+
+    else if(scenario === "s3"){
+
+        stormAlert.innerHTML =
+        "⚠ Space Weather Status: S3 Solar Particle Event";
+
+        missionRisk.innerHTML =
+        "Crew at Risk: 2 / 4";
+
+        highestDose.innerHTML =
+        "Highest Event Dose: 2.09 Gy";
+
+        mostExposed.innerHTML =
+        "Most Exposed Crew Member: Reyes";
+
+        reyesStatus.innerHTML = "🚨 High Risk";
+        reyesDose.innerHTML = "Event Dose: 2.09 Gy";
+        reyesCI.innerHTML = "95% CI: 1.90 - 2.20 Gy";
+        reyesQuality.innerHTML =
+        "Radiation Quality: High LET Component";
+        reyesSymptoms.innerHTML =
+        "Symptoms: Nausea";
+
+        okaforStatus.innerHTML = "✅ Protected";
+        okaforDose.innerHTML = "Event Dose: < 0.5 Gy";
+
+        lindqvistStatus.innerHTML = "✅ Protected";
+        lindqvistDose.innerHTML = "Event Dose: < 0.5 Gy";
+
+        harutoStatus.innerHTML = "⚠ Exposure Detected";
+        harutoDose.innerHTML = "Event Dose: 0.55 Gy";
+        harutoCI.innerHTML = "95% CI: 0.48 - 0.64 Gy";
+        harutoQuality.innerHTML =
+        "Radiation Quality: Proton Dominated";
+        harutoSymptoms.innerHTML =
+        "Symptoms: Mild Exposure";
+    }
+
+    else if(scenario === "post48"){
+
+        stormAlert.innerHTML =
+        "Post-Event 48 Hour Review";
+
+        missionRisk.innerHTML =
+        "Crew at Risk: 1 / 4";
+
+        highestDose.innerHTML =
+        "Highest Event Dose: 1.92 Gy";
+
+        mostExposed.innerHTML =
+        "Most Exposed Crew Member: Reyes";
+
+        reyesStatus.innerHTML =
+        "⚠ Recovery Monitoring";
+
+        reyesDose.innerHTML =
+        "Event Dose: 1.92 Gy";
+
+        reyesCI.innerHTML =
+        "95% CI: 1.80 - 2.05 Gy";
+
+        reyesQuality.innerHTML =
+        "Radiation Quality: High LET Component";
+
+        reyesSymptoms.innerHTML =
+        "Symptoms Improving";
+
+        harutoStatus.innerHTML =
+        "⚠ Observation";
+
+        harutoDose.innerHTML =
+        "Event Dose: 0.58 Gy";
+
+        harutoSymptoms.innerHTML =
+        "Symptoms Stable";
+    }
+}
+
+window.onload = function(){
+
+    let savedScenario =
+    localStorage.getItem("missionScenario");
+
+    if(savedScenario){
+        document.getElementById("scenario").value =
+        savedScenario;
+    }
+
+    changeScenario();
+};
+
+</script>
+
+</body>
+</html>

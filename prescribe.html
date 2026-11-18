@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Prescribe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>AEGIS-RX</h1>
+
+    <div class="navbar">
+        <a href="index.html">Mission Status</a>
+        <a href="biodosimetry.html">Biodosimetry</a>
+        <a href="pharmacy.html">Pharmacy</a>
+        <a href="prescribe.html">Prescribe</a>
+        <a href="missionphases.html">Mission Phases</a>
+    </div>
+
+    <h2>Prescription Decision</h2>
+
+    <div class="crew-grid">
+
+        <div class="card" onclick="showPrescription('reyes')">
+            <h3>Reyes</h3>
+
+            <p><strong>Role:</strong> Commander</p>
+            <p><strong>Sex:</strong> Female</p>
+            <p><strong>Age:</strong> 46</p>
+            <p><strong>Height:</strong> 168 cm</p>
+            <p><strong>Weight:</strong> 64 kg</p>
+
+            <p><strong>Allergy:</strong> Sulfonamide Antibiotics</p>
+
+            <p><strong>Medication:</strong><br>
+            Ethinylestradiol / Levonorgestrel
+            </p>
+        </div>
+
+        <div class="card" onclick="showPrescription('okafor')">
+            <h3>Okafor</h3>
+
+            <p><strong>Role:</strong> Pilot</p>
+            <p><strong>Sex:</strong> Male</p>
+            <p><strong>Age:</strong> 42</p>
+            <p><strong>Height:</strong> 182 cm</p>
+            <p><strong>Weight:</strong> 81 kg</p>
+
+            <p><strong>Allergy:</strong> None</p>
+
+            <p><strong>Medication:</strong><br>
+            None
+            </p>
+        </div>
+
+        <div class="card" onclick="showPrescription('lindqvist')">
+            <h3>Lindqvist</h3>
+
+            <p><strong>Role:</strong> Mission Specialist</p>
+            <p><strong>Sex:</strong> Female</p>
+            <p><strong>Age:</strong> 39</p>
+            <p><strong>Height:</strong> 174 cm</p>
+            <p><strong>Weight:</strong> 72 kg</p>
+
+            <p><strong>Allergy:</strong> Penicillins</p>
+
+            <p><strong>Medication:</strong><br>
+            Vitamin D Supplement
+            </p>
+        </div>
+
+        <div class="card" onclick="showPrescription('haruto')">
+            <h3>Haruto</h3>
+
+            <p><strong>Role:</strong> Flight Engineer</p>
+            <p><strong>Sex:</strong> Male</p>
+            <p><strong>Age:</strong> 37</p>
+            <p><strong>Height:</strong> 170 cm</p>
+            <p><strong>Weight:</strong> 68 kg</p>
+
+            <p><strong>Allergy:</strong> None</p>
+
+            <p><strong>Medication:</strong><br>
+            Sleep Regulation Medication
+            </p>
+        </div>
+
+    </div>
+
+    <div class="card report-card" id="reportCard">
+
+        <h2 id="astronaut">
+            Select an Astronaut
+        </h2>
+
+        <p id="missionStatus"
+           class="status-pill"
+           style="display:none;">
+        </p>
+
+        <hr>
+
+        <div class="report-row">
+            <span>Condition</span>
+            <p id="condition"></p>
+        </div>
+
+        <div class="report-row">
+            <span>Recommended Drug</span>
+            <p id="drug"></p>
+        </div>
+
+        <div class="report-row">
+            <span>Label Dose</span>
+            <p id="labelDose"></p>
+        </div>
+
+        <div class="report-row">
+            <span>Adjusted Dose</span>
+            <p id="correctedDose"></p>
+        </div>
+
+        <div class="report-row">
+            <span>Reason</span>
+            <p id="reason"></p>
+        </div>
+
+    </div>
+
+<script>
+
+function showPrescription(person){
+
+    document.getElementById("missionStatus")
+    .style.display = "inline-block";
+
+    let scenario =
+    localStorage.getItem("missionScenario");
+
+    if(person === "reyes"){
+
+        astronaut.innerHTML = "Reyes";
+
+        if(scenario === "nominal"){
+
+            missionStatus.innerHTML = "✅ NORMAL";
+
+            condition.innerHTML =
+            "No Treatment Required";
+
+            drug.innerHTML =
+            "Continue Monitoring";
+
+            labelDose.innerHTML = "-";
+            correctedDose.innerHTML = "-";
+
+            reason.innerHTML =
+            "No significant radiation exposure detected.";
+        }
+
+        else if(scenario === "s3"){
+
+            missionStatus.innerHTML =
+            "🚨 HIGH RISK";
+
+            condition.innerHTML =
+            "Radiation Nausea";
+
+            drug.innerHTML =
+            "Promethazine";
+
+            labelDose.innerHTML =
+            "25 mg";
+
+            correctedDose.innerHTML =
+            "25.2 mg";
+
+            reason.innerHTML =
+            "2.09 Gy biodosimetry estimate. Symptomatic exposure detected.";
+        }
+
+        else if(scenario === "post48"){
+
+            missionStatus.innerHTML =
+            "⚠ RECOVERY MONITORING";
+
+            condition.innerHTML =
+            "Recovery Monitoring";
+
+            drug.innerHTML =
+            "Continue Observation";
+
+            labelDose.innerHTML = "-";
+
+            correctedDose.innerHTML = "-";
+
+            reason.innerHTML =
+            "Dose estimate 1.92 Gy. Symptoms improving.";
+        }
+    }
+
+    else if(person === "okafor"){
+
+        astronaut.innerHTML = "Okafor";
+
+        missionStatus.innerHTML =
+        "✅ PROTECTED";
+
+        condition.innerHTML =
+        "No Treatment Required";
+
+        drug.innerHTML =
+        "Continue Monitoring";
+
+        labelDose.innerHTML = "-";
+
+        correctedDose.innerHTML = "-";
+
+        reason.innerHTML =
+        "Protected in storm shelter. Dose remains below detection threshold.";
+    }
+
+    else if(person === "lindqvist"){
+
+        astronaut.innerHTML = "Lindqvist";
+
+        missionStatus.innerHTML =
+        "✅ PROTECTED";
+
+        condition.innerHTML =
+        "No Treatment Required";
+
+        drug.innerHTML =
+        "Continue Monitoring";
+
+        labelDose.innerHTML = "-";
+
+        correctedDose.innerHTML = "-";
+
+        reason.innerHTML =
+        "Protected in storm shelter. No concerning biomarkers detected.";
+    }
+
+    else if(person === "haruto"){
+
+        astronaut.innerHTML = "Haruto";
+
+        if(scenario === "nominal"){
+
+            missionStatus.innerHTML =
+            "✅ NORMAL";
+
+            condition.innerHTML =
+            "No Treatment Required";
+
+            drug.innerHTML =
+            "Continue Monitoring";
+
+            labelDose.innerHTML = "-";
+
+            correctedDose.innerHTML = "-";
+
+            reason.innerHTML =
+            "No abnormal findings.";
+        }
+
+        else if(
+            scenario === "s3" ||
+            scenario === "post48"
+        ){
+
+            missionStatus.innerHTML =
+            "⚠ OBSERVATION";
+
+            condition.innerHTML =
+            "Mild Radiation Exposure";
+
+            drug.innerHTML =
+            "Observation Only";
+
+            labelDose.innerHTML = "-";
+
+            correctedDose.innerHTML = "-";
+
+            reason.innerHTML =
+            "Low-level exposure detected. Repeat panel if symptoms develop.";
+        }
+    }
+
+    document.getElementById("reportCard")
+    .scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>

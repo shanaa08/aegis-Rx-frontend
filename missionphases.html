@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mission Phases</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<h1>AEGIS-Rx</h1>
+
+<div class="navbar">
+    <a href="index.html">Mission Status</a>
+    <a href="biodosimetry.html">Biodosimetry</a>
+    <a href="pharmacy.html">Pharmacy</a>
+    <a href="prescribe.html">Prescribe</a>
+    <a href="missionphases.html">Mission Phases</a>
+</div>
+
+<h2>Mission Phases</h2>
+
+<div class="crew-grid">
+
+    <div class="card" onclick="showPhase('preflight')">
+        <h3>Pre-Flight</h3>
+    </div>
+
+    <div class="card" onclick="showPhase('launch')">
+        <h3>Launch & Ascent</h3>
+    </div>
+
+    <div class="card" onclick="showPhase('outbound')">
+        <h3>Outbound Transit</h3>
+    </div>
+
+    <div class="card" onclick="showPhase('planetary')">
+        <h3>Planetary Operations</h3>
+    </div>
+
+    <div class="card" onclick="showPhase('return')">
+        <h3>Return Transit</h3>
+    </div>
+
+    <div class="card" onclick="showPhase('landing')">
+        <h3>Re-entry & Landing</h3>
+    </div>
+
+    <div class="card" onclick="showPhase('postflight')">
+        <h3>Post-Flight</h3>
+    </div>
+
+</div>
+
+<div class="card report-card" id="phaseReport">
+
+    <h2 id="phaseTitle">
+        Select a Mission Phase
+    </h2>
+
+    <p id="phaseDose"></p>
+
+    <p id="phaseRisk"></p>
+
+    <p id="phaseAction"></p>
+
+</div>
+
+<div class="card">
+
+    <h2>Per Astronaut Evaluation</h2>
+
+    <table class="profile-table">
+
+        <tr>
+            <th>Crew</th>
+            <th>Total mSv</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>Reyes</td>
+            <td id="reyesTotal">412</td>
+            <td id="reyesStatus">69% of limit</td>
+        </tr>
+
+        <tr>
+            <td>Okafor</td>
+            <td id="okaforTotal">388</td>
+            <td id="okaforStatus">65% of limit</td>
+        </tr>
+
+        <tr>
+            <td>Lindqvist</td>
+            <td id="lindqvistTotal">420</td>
+            <td id="lindqvistStatus">70% of limit</td>
+        </tr>
+
+        <tr>
+            <td>Haruto</td>
+            <td id="harutoTotal">376</td>
+            <td id="harutoStatus">63% of limit</td>
+        </tr>
+
+    </table>
+
+</div>
+
+<div class="card">
+
+    <h2>Whole Mission Radiation Exposure</h2>
+
+    <p id="missionDoseText">
+        982 mSv / 600 mSv Career Limit
+    </p>
+
+    <progress value="982" max="1000"></progress>
+
+    <p>
+        Typical Mars mission exceeds the 600 mSv career limit.
+    </p>
+
+</div>
+
+<footer>
+    Decision Support Only • Synthetic Crew Data • Not a Medical Device
+</footer>
+
+<script>
+
+function showPhase(phase){
+
+    if(phase === "preflight"){
+
+        phaseTitle.innerHTML = "Pre-Flight";
+
+        phaseDose.innerHTML =
+        "Dose Rate: 0.0066 mSv/day (Earth background)";
+
+        phaseRisk.innerHTML =
+        "Main Risks: None";
+
+        phaseAction.innerHTML =
+        "AEGIS-Rx performs genotyping, baseline blood panels and health profile setup.";
+    }
+
+    else if(phase === "launch"){
+
+        phaseTitle.innerHTML =
+        "Launch & Ascent";
+
+        phaseDose.innerHTML =
+        "Radiation not measured";
+
+        phaseRisk.innerHTML =
+        "Main Risks: Motion sickness, g-forces, Van Allen belt crossing";
+
+        phaseAction.innerHTML =
+        "Motion-sickness medication screened using genotype.";
+    }
+
+    else if(phase === "outbound"){
+
+        phaseTitle.innerHTML =
+        "Outbound Transit";
+
+        phaseDose.innerHTML =
+        "Phase Dose: 331 mSv";
+
+        phaseRisk.innerHTML =
+        "Main Risks: Solar storms, bone loss, fluid shift";
+
+        phaseAction.innerHTML =
+        "Dose tracking, sleep-aid checks and blood-panel review.";
+    }
+
+    else if(phase === "planetary"){
+
+        phaseTitle.innerHTML =
+        "Planetary Operations";
+
+        phaseDose.innerHTML =
+        "Phase Dose: 320 mSv";
+
+        phaseRisk.innerHTML =
+        "Main Risks: EVA exposure, dust and partial gravity";
+
+        phaseAction.innerHTML =
+        "Career-dose tracking and EVA planning.";
+    }
+
+    else if(phase === "return"){
+
+        phaseTitle.innerHTML =
+        "Return Transit";
+
+        phaseDose.innerHTML =
+        "Phase Dose: 331 mSv";
+
+        phaseRisk.innerHTML =
+        "Main Risks: Fatigue and old drug inventory";
+
+        phaseAction.innerHTML =
+        "Medication potency checks and cumulative dose review.";
+    }
+
+    else if(phase === "landing"){
+
+        phaseTitle.innerHTML =
+        "Re-entry & Landing";
+
+        phaseDose.innerHTML =
+        "Radiation exposure effectively complete";
+
+        phaseRisk.innerHTML =
+        "Main Risks: Dizziness, balance issues, nausea";
+
+        phaseAction.innerHTML =
+        "Pre-landing medication review.";
+    }
+
+    else if(phase === "postflight"){
+
+        phaseTitle.innerHTML =
+        "Post-Flight";
+
+        phaseDose.innerHTML =
+        "Earth background levels";
+
+        phaseRisk.innerHTML =
+        "Main Risks: Readaptation and cancer risk";
+
+        phaseAction.innerHTML =
+        "Blood monitoring and long-term screening.";
+    }
+
+    document.getElementById("phaseReport")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+}
+
+</script>
+
+</body>
+
+</html>

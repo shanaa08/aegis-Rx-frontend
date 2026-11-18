@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AEGIS-Rx Biodosimetry</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <h1>AEGIS-Rx</h1>
+
+    <div class="navbar">
+        <a href="index.html">Mission Status</a>
+        <a href="biodosimetry.html">Biodosimetry</a>
+        <a href="pharmacy.html">Pharmacy</a>
+        <a href="prescribe.html">Prescribe</a>
+        <a href="missionphases.html">Mission Phases</a>
+    </div>
+
+    <h2>Biodosimetry Report</h2>
+
+    <div class="card" onclick="showData('Reyes')">
+        <h3>Reyes</h3>
+        <p class="warning">Click to View Report</p>
+    </div>
+
+    <div class="card" onclick="showData('Okafor')">
+        <h3> Okafor</h3>
+        <p class="danger">Click to View Report</p>
+    </div>
+
+    <div class="card" onclick="showData('Lindqvist')">
+        <h3>Lindqvist</h3>
+        <p class="warning">Click to View Report</p>
+    </div>
+
+    <div class="card" onclick="showData('Haruto')">
+        <h3>Haruto</h3>
+        <p class="safe">Click to View Report</p>
+    </div>
+
+    <br>
+
+    <div class="card" id="reportCard">
+
+        <h2 id="astronautName">Select an Astronaut</h2>
+
+        <p id="dose"></p>
+        <p id="confidence"></p>
+        <p id="quality"></p>
+        <p id="status"></p>
+
+        <h3>Gene Expression Panel</h3>
+
+        <p>FDXR</p>
+        <progress id="fdxr" value="0" max="100"></progress>
+
+        <p>CDKN1A</p>
+        <progress id="cdkn1a" value="0" max="100"></progress>
+
+        <p>DDB2</p>
+        <progress id="ddb2" value="0" max="100"></progress>
+
+    </div>
+
+    <script>
+
+        function showData(person) {
+
+    let scenario =
+    localStorage.getItem("missionScenario");
+
+    astronautName.innerHTML = person;
+
+    if(person === "Reyes"){
+
+        if(scenario === "nominal"){
+
+            dose.innerHTML =
+            "Estimated Radiation Dose: <0.5 Gy";
+
+            confidence.innerHTML =
+            "Confidence Interval: N/A";
+
+            quality.innerHTML =
+            "Radiation Quality: None Detected";
+
+            status.innerHTML =
+            "Status: Normal";
+
+            fdxr.value = 10;
+            cdkn1a.value = 10;
+            ddb2.value = 10;
+        }
+
+        else if(scenario === "s3"){
+
+            dose.innerHTML =
+            "Estimated Radiation Dose: 2.09 Gy";
+
+            confidence.innerHTML =
+            "Confidence Interval: 1.90 - 2.20 Gy";
+
+            quality.innerHTML =
+            "Radiation Quality: High LET Component";
+
+            status.innerHTML =
+            "Status: High Risk";
+
+            fdxr.value = 95;
+            cdkn1a.value = 90;
+            ddb2.value = 88;
+        }
+
+        else if(scenario === "post48"){
+
+            dose.innerHTML =
+            "Estimated Radiation Dose: 1.92 Gy";
+
+            confidence.innerHTML =
+            "Confidence Interval: 1.80 - 2.05 Gy";
+
+            quality.innerHTML =
+            "Radiation Quality: High LET Component";
+
+            status.innerHTML =
+            "Status: Recovery Monitoring";
+
+            fdxr.value = 80;
+            cdkn1a.value = 76;
+            ddb2.value = 72;
+        }
+    }
+
+    else if(person === "Okafor"){
+
+        dose.innerHTML =
+        "Estimated Radiation Dose: <0.5 Gy";
+
+        confidence.innerHTML =
+        "Confidence Interval: N/A";
+
+        quality.innerHTML =
+        "Radiation Quality: None Detected";
+
+        status.innerHTML =
+        "Status: Protected";
+
+        fdxr.value = 15;
+        cdkn1a.value = 12;
+        ddb2.value = 10;
+    }
+
+    else if(person === "Lindqvist"){
+
+        dose.innerHTML =
+        "Estimated Radiation Dose: <0.5 Gy";
+
+        confidence.innerHTML =
+        "Confidence Interval: N/A";
+
+        quality.innerHTML =
+        "Radiation Quality: None Detected";
+
+        status.innerHTML =
+        "Status: Protected";
+
+        fdxr.value = 14;
+        cdkn1a.value = 11;
+        ddb2.value = 9;
+    }
+
+    else if(person === "Haruto"){
+
+        if(scenario === "nominal"){
+
+            dose.innerHTML =
+            "Estimated Radiation Dose: <0.5 Gy";
+
+            confidence.innerHTML =
+            "Confidence Interval: N/A";
+
+            quality.innerHTML =
+            "Radiation Quality: None Detected";
+
+            status.innerHTML =
+            "Status: Normal";
+
+            fdxr.value = 10;
+            cdkn1a.value = 10;
+            ddb2.value = 10;
+        }
+
+        else if(scenario === "s3"){
+
+            dose.innerHTML =
+            "Estimated Radiation Dose: 0.55 Gy";
+
+            confidence.innerHTML =
+            "Confidence Interval: 0.48 - 0.64 Gy";
+
+            quality.innerHTML =
+            "Radiation Quality: Proton Dominated";
+
+            status.innerHTML =
+            "Status: Exposure Detected";
+
+            fdxr.value = 35;
+            cdkn1a.value = 30;
+            ddb2.value = 25;
+        }
+
+        else if(scenario === "post48"){
+
+            dose.innerHTML =
+            "Estimated Radiation Dose: 0.58 Gy";
+
+            confidence.innerHTML =
+            "Confidence Interval: 0.50 - 0.66 Gy";
+
+            quality.innerHTML =
+            "Radiation Quality: Proton Dominated";
+
+            status.innerHTML =
+            "Status: Observation";
+
+            fdxr.value = 28;
+            cdkn1a.value = 26;
+            ddb2.value = 24;
+        }
+    }
+
+    document.getElementById("reportCard")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+}
+        
+
+    </script>
+<script>
+
+let scenario =
+localStorage.getItem("missionScenario");
+
+if(scenario === "s3"){
+
+    // Reyes = 2.09 Gy
+    // Haruto = 0.55 Gy
+}
+
+else if(scenario === "post72"){
+
+    // Reyes = 1.92 Gy
+    // Haruto = 0.58 Gy
+}
+
+else{
+
+    // Nominal values
+}
+
+</script>
+</body>
+
+</html>
+
+   
