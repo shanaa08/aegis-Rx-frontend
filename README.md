@@ -60,7 +60,7 @@ AEGIS-Rx was developed through a collaborative effort involving frontend develop
 ### Pharmacy
 <img width="1600" height="699" alt="pharmacy1" src="https://github.com/user-attachments/assets/0f36cbaf-a3b5-4deb-99af-f54124f86560" />
 
-### Prescirption
+### Prescription
 <img width="1600" height="725" alt="pres1" src="https://github.com/user-attachments/assets/875cecb9-56d7-4564-9c49-b3b5a6eff45e" />
 
 ### Mission Phase
